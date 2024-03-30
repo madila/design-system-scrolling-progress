@@ -1,0 +1,92 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+
+section {
+	&.wp-block-design-system-scrolling-progress {
+		position: relative;
+		--progress--z-index: 1;
+		--progress-height: var(--wp--preset--spacing--5);
+		--progress-accent: var(--wp--preset--color--accent);
+		--progress-base: color-mix(in srgb, transparent 80%, var(--wp--preset--color--contrast));
+		--progress-label--font-size: var(--wp--preset--font-size--small);
+		--progress-label--radius: var(--wp--preset--spacing--10);
+		--progress-label--padding: var(--wp--preset--spacing--5) var(--wp--preset--spacing--10);
+		--progress-label--bg: var(--wp--preset--color--accent);
+		--progress-label--color: light-dark(var(--wp--preset--color--contrast-2), var(--wp--preset--color--base));
+
+		--progress-label--top: calc(var(--progress-height) * 2.5);
+
+		> label {
+			position: sticky;
+			z-index: var(--progress--z-index);
+			display: flex;
+			max-width: var(--wp--style--global--content-size);
+			margin: 0 auto;
+			padding-right: var(--wp--style--root--padding-right);
+			padding-left: var(--wp--style--root--padding-left);
+
+			font-weight: 500;
+			left: var(--progress-label--left, var(--wp--preset--spacing--10));
+			scroll-padding-top: var(--wp-admin--admin-bar--height);
+			top: calc(var(--top) + var(--progress-label--top));
+
+			justify-content: flex-end;
+
+			@media screen and (min-width: 601px) {
+				.admin-bar & {
+					top: calc(var(--top) + var(--progress-label--top) + var(--wp-admin--admin-bar--height));
+				}
+			}
+
+			.progress__value {
+				min-width: 4ch;
+				display: inline-flex;
+				justify-content: flex-end;
+			}
+
+			> span {
+				font-size: var(--progress-label--font-size);
+				border-radius: var(--progress-label--radius);
+				background-color: var(--progress-label--bg);
+				color: var(--progress-label--color);
+				padding: var(--progress-label--padding);
+			}
+		}
+
+		&[data-ready] {
+			progress { opacity: 1 }
+		}
+
+		progress::-moz-progress-bar { background: var(--progress-accent); }
+		progress::-webkit-progress-bar { background: var(--progress-base); }
+		progress::-webkit-progress-value { background: var(--progress-accent); }
+		progress {
+			z-index: var(--progress--z-index);
+			opacity: 0;
+			color: var(--progress-accent);
+			width: 100%;
+			position: sticky;
+			top: calc(var(--top));
+			scroll-padding-top: var(--wp-admin--admin-bar--height);
+			margin-bottom: 1rem;
+			height: var(--progress-height);
+
+			border-radius: 0;
+
+			@media screen and (min-width: 783px) {
+				.admin-bar & {
+					top: calc(var(--top) + var(--wp-admin--admin-bar--height));
+				}
+			}
+
+			&.is-style-rounded {
+				border-radius: unset;
+			}
+		}
+	}
+}
