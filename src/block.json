@@ -15,6 +15,23 @@
 			"allowOrientation": true,
 			"allowInheriting": true
 		},
+		"color": {
+			"gradients": true,
+			"heading": true,
+			"link": true,
+			"__experimentalDefaultControls": {
+				"background": true,
+				"text": true
+			}
+		},
+		"spacing": {
+			"margin": true,
+			"padding": true,
+			"blockGap": true
+		},
+		"dimensions": {
+			"minHeight": true
+		},
 		"ariaLabel": true,
 		"background": {
 			"backgroundImage": true,

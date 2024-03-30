@@ -1,1 +1,122 @@
-import*as e from"@wordpress/interactivity";var t={d:(e,o)=>{for(var r in o)t.o(o,r)&&!t.o(e,r)&&Object.defineProperty(e,r,{enumerable:!0,get:o[r]})},o:(e,t)=>Object.prototype.hasOwnProperty.call(e,t)};const o=(n={getContext:()=>e.getContext,getElement:()=>e.getElement,store:()=>e.store,withScope:()=>e.withScope},l={},t.d(l,n),l),{state:r,actions:i,callbacks:s}=(0,o.store)("create-block",{state:{timer:null},actions:{reset:()=>{const e=(0,o.getContext)(),{ref:t}=(0,o.getElement)(),{requestAnimationFrame:r,requestIdleCallback:i}=window,n=document.querySelector(e.offsetSelector);n&&(e.offsetHeight=`${n.getBoundingClientRect().height}px`,e.offsetTop=n.getBoundingClientRect().height),t.dataset.ready=!0,i((0,o.withScope)((()=>{e.max=t.getBoundingClientRect().height-e.offsetTop,e.stopAt=t.getBoundingClientRect().height+e.offsetTop,s.bodyScrolled()})))}},callbacks:{resize:e=>{r.timer&&clearTimeout(r.timer),console.log(r.timer,"trigger-resize"),r.timer=setTimeout((0,o.withScope)((()=>{i.reset()})),30,e)},bodyScrolled:()=>{const{scrollY:e}=window,t=(0,o.getContext)();if(e>t.stopAt)return;t.value=e<t.offsetTop?0:e-t.offsetTop;const r=(100*t.value/t.max).toFixed();t.progress=r<100?r:100,t.label=`${t.progress}%`}}});var n,l;
+import * as __WEBPACK_EXTERNAL_MODULE__wordpress_interactivity_8e89b257__ from "@wordpress/interactivity";
+/******/ var __webpack_modules__ = ({
+
+/***/ "@wordpress/interactivity":
+/*!*******************************************!*\
+  !*** external "@wordpress/interactivity" ***!
+  \*******************************************/
+/***/ ((module) => {
+
+var x = (y) => {
+	var x = {}; __webpack_require__.d(x, y); return x
+} 
+var y = (x) => (() => (x))
+module.exports = __WEBPACK_EXTERNAL_MODULE__wordpress_interactivity_8e89b257__;
+
+/***/ })
+
+/******/ });
+/************************************************************************/
+/******/ // The module cache
+/******/ var __webpack_module_cache__ = {};
+/******/ 
+/******/ // The require function
+/******/ function __webpack_require__(moduleId) {
+/******/ 	// Check if module is in cache
+/******/ 	var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 	if (cachedModule !== undefined) {
+/******/ 		return cachedModule.exports;
+/******/ 	}
+/******/ 	// Create a new module (and put it into the cache)
+/******/ 	var module = __webpack_module_cache__[moduleId] = {
+/******/ 		// no module.id needed
+/******/ 		// no module.loaded needed
+/******/ 		exports: {}
+/******/ 	};
+/******/ 
+/******/ 	// Execute the module function
+/******/ 	__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 
+/******/ 	// Return the exports of the module
+/******/ 	return module.exports;
+/******/ }
+/******/ 
+/************************************************************************/
+/******/ /* webpack/runtime/make namespace object */
+/******/ (() => {
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = (exports) => {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/ })();
+/******/ 
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+/*!*********************!*\
+  !*** ./src/view.js ***!
+  \*********************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/interactivity */ "@wordpress/interactivity");
+/**
+ * WordPress dependencies
+ */
+
+const {
+  state,
+  actions,
+  callbacks
+} = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.store)('create-block', {
+  state: {
+    timer: null
+  },
+  actions: {
+    reset: () => {
+      const context = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getContext)();
+      const {
+        ref
+      } = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getElement)();
+      const {
+        requestAnimationFrame
+      } = window;
+      const header = document.querySelector(context.offsetSelector);
+      if (header) {
+        context.offsetHeight = `${header.getBoundingClientRect().height}px`;
+        context.offsetTop = header.getBoundingClientRect().height;
+      }
+      ref.dataset.ready = true;
+      requestAnimationFrame((0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.withScope)(() => {
+        context.max = ref.getBoundingClientRect().height - context.offsetTop;
+        context.stopAt = ref.getBoundingClientRect().height + context.offsetTop;
+        callbacks.bodyScrolled();
+      }));
+    }
+  },
+  callbacks: {
+    resize: event => {
+      if (state.timer) clearTimeout(state.timer);
+      state.timer = setTimeout((0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.withScope)(() => {
+        actions.reset();
+      }), 30, event);
+    },
+    bodyScrolled: () => {
+      const {
+        scrollY
+      } = window;
+      const context = (0,_wordpress_interactivity__WEBPACK_IMPORTED_MODULE_0__.getContext)();
+      if (scrollY > context.stopAt) return;
+      context.value = scrollY < context.offsetTop ? 0 : scrollY - context.offsetTop;
+      const scrollProgress = (context.value * 100 / context.max).toFixed();
+      context.progress = scrollProgress < 100 ? scrollProgress : 100;
+      context.label = `${context.progress}%`;
+    }
+  }
+});
+})();
+
+
+//# sourceMappingURL=view.js.map

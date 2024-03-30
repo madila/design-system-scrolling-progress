@@ -11,7 +11,7 @@ const { state, actions, callbacks } = store( 'create-block', {
 		reset: () => {
 			const context = getContext();
 			const { ref } = getElement();
-			const { requestAnimationFrame, requestIdleCallback } = window;
+			const { requestAnimationFrame } = window;
 
 			const header = document.querySelector(context.offsetSelector);
 			if(header) {
@@ -21,7 +21,7 @@ const { state, actions, callbacks } = store( 'create-block', {
 
 			ref.dataset.ready = true;
 
-			requestIdleCallback(withScope(() => {
+			requestAnimationFrame(withScope(() => {
 				context.max = ref.getBoundingClientRect().height - context.offsetTop;
 				context.stopAt = ref.getBoundingClientRect().height + context.offsetTop
 				callbacks.bodyScrolled();
@@ -32,7 +32,6 @@ const { state, actions, callbacks } = store( 'create-block', {
 	callbacks: {
 		resize: (event) => {
 			if(state.timer) clearTimeout(state.timer);
-			console.log(state.timer, 'trigger-resize');
 			state.timer = setTimeout(withScope(() => {
 				actions.reset();
 			}),30, event);
