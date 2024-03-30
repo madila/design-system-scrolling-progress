@@ -9,6 +9,8 @@
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       design-system-scrolling-progress
+ * Github Plugin URI: madila/design-system-scrolling-progress
+ * Primary Branch:    main
  *
  * @package           create-block
  */
