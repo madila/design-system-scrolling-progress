@@ -10,6 +10,10 @@
  * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
  */
 
+
+
+$unique_id = wp_unique_id( $block->name.'-' );
+
 ?>
 
 <section
@@ -23,14 +27,20 @@
     data-wp-on-window--resize="callbacks.resize"
     data-wp-on--force-resize="actions.reset"
 >
-	<progress
-		data-wp-on--click="actions.toggle"
-        data-wp-bind--value="context.value"
-        data-wp-bind--max="context.max"
-	>
-	</progress>
-    <label for="#<?php echo $block->id; ?>">
-        <span class="progress__label">Reading progress: <span class="progress__value" data-wp-text="context.label"></span></span>
-    </label>
+    <div class="progressbar">
+        <div
+                role="progressbar"
+                class="progressbar__value"
+                id="<?php echo $unique_id; ?>"
+                data-wp-on--click="actions.toggle"
+                data-wp-bind--value="context.value"
+                data-wp-style--width="context.label"
+                data-wp-bind--max="context.max"
+        >
+        </div>
+        <label class="progressbar__label__container" for="#<?php echo $unique_id; ?>">
+            <span class="progress__label">Reading progress: <span class="progress__value" data-wp-text="context.label"></span></span>
+        </label>
+    </div>
     <?php echo $content; ?>
 </section>

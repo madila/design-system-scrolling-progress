@@ -5,10 +5,10 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-
 section {
 	&.wp-block-design-system-scrolling-progress {
 		position: relative;
+
 		--progress--z-index: 1;
 		--progress-height: var(--wp--preset--spacing--5);
 		--progress-accent: var(--wp--preset--color--accent);
@@ -17,29 +17,46 @@ section {
 		--progress-label--radius: var(--wp--preset--spacing--10);
 		--progress-label--padding: var(--wp--preset--spacing--5) var(--wp--preset--spacing--10);
 		--progress-label--bg: var(--wp--preset--color--accent);
-		--progress-label--color: light-dark(var(--wp--preset--color--contrast-2), var(--wp--preset--color--base));
+		--progress-label--color: var(--wp--preset--color--base);
 
-		--progress-label--top: calc(var(--progress-height) * 2.5);
+		--progress-label--top: var(--wp--preset--spacing--20);
 
-		> label {
-			position: sticky;
+		.progressbar__value {
+			background-color: var(--progress-accent);
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 0;
+			height: var(--progress-height) !important;
+		}
+
+		.progress { margin-block-end: 0; }
+		.progress::-moz-progress-bar { background-color: var(--progress-accent); }
+		.progress::-webkit-progress-bar { background-color: var(--progress-base); height: var(--progress-height) !important; }
+		.progress::-webkit-progress-value { background-color: var(--progress-accent); }
+
+		.progressbar__label__container {
+			position: absolute;
 			z-index: var(--progress--z-index);
 			display: flex;
+			width: 100%;
 			max-width: var(--wp--style--global--content-size);
-			margin: 0 auto;
 			padding-right: var(--wp--style--root--padding-right);
 			padding-left: var(--wp--style--root--padding-left);
 
 			font-weight: 500;
-			left: var(--progress-label--left, var(--wp--preset--spacing--10));
+			left: 50%;
+			transform: translateX(-50%);
+			//left: var(--progress-label--left, var(--wp--preset--spacing--10));
 			scroll-padding-top: var(--wp-admin--admin-bar--height);
-			top: calc(var(--top) + var(--progress-label--top));
+			top: var(--wp--preset--spacing--10);
+			//top: calc(var(--top) + var(--progress-label--top) - var(--progress-height));
 
 			justify-content: flex-end;
 
 			@media screen and (min-width: 601px) {
 				.admin-bar & {
-					top: calc(var(--top) + var(--progress-label--top) + var(--wp-admin--admin-bar--height));
+					top: calc(var(--top) + var(--progress-label--top) + var(--wp-admin--admin-bar--height) - var(--progress-height));
 				}
 			}
 
@@ -49,7 +66,7 @@ section {
 				justify-content: flex-end;
 			}
 
-			> span {
+			> .progress__label {
 				font-size: var(--progress-label--font-size);
 				border-radius: var(--progress-label--radius);
 				background-color: var(--progress-label--bg);
@@ -59,21 +76,16 @@ section {
 		}
 
 		&[data-ready] {
-			progress { opacity: 1 }
+			.progressbar { opacity: 1 }
 		}
 
-		progress::-moz-progress-bar { background: var(--progress-accent); }
-		progress::-webkit-progress-bar { background: var(--progress-base); }
-		progress::-webkit-progress-value { background: var(--progress-accent); }
-		progress {
+		.progressbar {
 			z-index: var(--progress--z-index);
 			opacity: 0;
 			color: var(--progress-accent);
 			width: 100%;
 			position: sticky;
-			top: calc(var(--top));
-			scroll-padding-top: var(--wp-admin--admin-bar--height);
-			margin-bottom: 1rem;
+			top: var(--top);
 			height: var(--progress-height);
 
 			border-radius: 0;
