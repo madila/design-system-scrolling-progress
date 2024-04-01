@@ -11,46 +11,61 @@ section {
 
 		--progress--z-index: 1;
 		--progress-height: var(--wp--preset--spacing--5);
-		--progress-accent: var(--wp--preset--color--accent);
+		--progress-accent: #F8DB00;
 		--progress-base: color-mix(in srgb, transparent 80%, var(--wp--preset--color--contrast));
 		--progress-label--font-size: var(--wp--preset--font-size--small);
-		--progress-label--radius: var(--wp--preset--spacing--10);
+		--progress-label--radius: var(--wp--preset--spacing--30);
+		--progress-label--height: 2rem;
 		--progress-label--padding: var(--wp--preset--spacing--5) var(--wp--preset--spacing--10);
-		--progress-label--bg: var(--wp--preset--color--accent);
-		--progress-label--color: var(--wp--preset--color--base);
+		--progress-label--bg: var(--progress-accent);
+		--progress-label--color: #040404;
 
 		--progress-label--top: var(--wp--preset--spacing--20);
 
-		.progressbar__value {
-			background-color: var(--progress-accent);
-			display: block;
-			position: absolute;
-			left: 0;
-			top: 0;
-			height: var(--progress-height) !important;
+		.progressbar__container {
+			z-index: var(--progress--z-index);
+			opacity: 0;
+			color: var(--progress-accent);
+			position: sticky;
+			top: var(--top);
+			padding-right: var(--wp--style--root--padding-right);
+			padding-left: var(--wp--style--root--padding-left);
+			border-radius: 0;
+
+			@media screen and (min-width: 783px) {
+				.admin-bar & {
+					top: calc(var(--top) + var(--wp-admin--admin-bar--height));
+				}
+			}
 		}
 
-		.progress { margin-block-end: 0; }
-		.progress::-moz-progress-bar { background-color: var(--progress-accent); }
-		.progress::-webkit-progress-bar { background-color: var(--progress-base); height: var(--progress-height) !important; }
-		.progress::-webkit-progress-value { background-color: var(--progress-accent); }
+		.progressbar__bar {
+			background-color: var(--progress-base);
+			height: var(--progress-height);
+			margin-left: calc(var(--wp--style--root--padding-left) * -1);
+			margin-right: calc(var(--wp--style--root--padding-right) * -1);
+
+			&__value {
+				background-color: var(--progress-accent);
+				display: block;
+				position: relative;
+				left: 0;
+				top: 0;
+				height: var(--progress-height);
+			}
+		}
 
 		.progressbar__label__container {
-			position: absolute;
+			position: relative;
 			z-index: var(--progress--z-index);
 			display: flex;
 			width: 100%;
 			max-width: var(--wp--style--global--content-size);
-			padding-right: var(--wp--style--root--padding-right);
-			padding-left: var(--wp--style--root--padding-left);
+
+			margin: var(--wp--preset--spacing--10) auto 0;
+			box-sizing: border-box;
 
 			font-weight: 500;
-			left: 50%;
-			transform: translateX(-50%);
-			//left: var(--progress-label--left, var(--wp--preset--spacing--10));
-			scroll-padding-top: var(--wp-admin--admin-bar--height);
-			top: var(--wp--preset--spacing--10);
-			//top: calc(var(--top) + var(--progress-label--top) - var(--progress-height));
 
 			justify-content: flex-end;
 
@@ -60,13 +75,13 @@ section {
 				}
 			}
 
-			.progress__value {
+			.progress__label__value {
 				min-width: 4ch;
 				display: inline-flex;
 				justify-content: flex-end;
 			}
 
-			> .progress__label {
+			> .progressbar__label {
 				font-size: var(--progress-label--font-size);
 				border-radius: var(--progress-label--radius);
 				background-color: var(--progress-label--bg);
@@ -76,29 +91,8 @@ section {
 		}
 
 		&[data-ready] {
-			.progressbar { opacity: 1 }
+			.progressbar__container { opacity: 1 }
 		}
 
-		.progressbar {
-			z-index: var(--progress--z-index);
-			opacity: 0;
-			color: var(--progress-accent);
-			width: 100%;
-			position: sticky;
-			top: var(--top);
-			height: var(--progress-height);
-
-			border-radius: 0;
-
-			@media screen and (min-width: 783px) {
-				.admin-bar & {
-					top: calc(var(--top) + var(--wp-admin--admin-bar--height));
-				}
-			}
-
-			&.is-style-rounded {
-				border-radius: unset;
-			}
-		}
 	}
 }

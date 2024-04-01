@@ -17,7 +17,7 @@ $unique_id = wp_unique_id( $block->name.'-' );
 ?>
 
 <section
-	<?php echo get_block_wrapper_attributes(); ?>
+	<?php echo get_block_wrapper_attributes(['class' => 'has-global-padding']); ?>
 	data-wp-interactive="create-block"
 	<?php echo wp_interactivity_data_wp_context( array( 'progress' => 0, 'stopAt' => 99999, 'value' => 0, 'max' => 0 , 'offsetHeight' => 0, 'offsetTop' => 0, 'offsetSelector' => '.is-position-sticky:has(header)') ); ?>
     data-wp-init--start="actions.reset"
@@ -27,20 +27,18 @@ $unique_id = wp_unique_id( $block->name.'-' );
     data-wp-on-window--resize="callbacks.resize"
     data-wp-on--force-resize="actions.reset"
 >
-    <div class="progressbar">
+    <aside role="progressbar" class="progressbar__container alignfull">
         <div
-                role="progressbar"
-                class="progressbar__value"
-                id="<?php echo $unique_id; ?>"
-                data-wp-on--click="actions.toggle"
-                data-wp-bind--value="context.value"
-                data-wp-style--width="context.label"
-                data-wp-bind--max="context.max"
+            class="progressbar__bar"
+            id="<?php echo $unique_id; ?>"
         >
+            <span class="progressbar__bar__value" data-wp-style--width="context.label"></span>
         </div>
-        <label class="progressbar__label__container" for="#<?php echo $unique_id; ?>">
-            <span class="progress__label">Reading progress: <span class="progress__value" data-wp-text="context.label"></span></span>
-        </label>
-    </div>
+        <div class="progressbar__label__container">
+            <label class="progressbar__label" for="#<?php echo $unique_id; ?>">
+                <span class="progress__label__text">Reading progress: <span class="progress__label__value" data-wp-text="context.label"></span></span>
+            </label>
+        </div>
+    </aside>
     <?php echo $content; ?>
 </section>
