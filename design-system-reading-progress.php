@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Design System Scrolling Progress
  * Description:       An interactive block with the Interactivity API
- * Version:           0.1.2
+ * Version:           0.1.3
  * Requires at least: 6.1
  * Requires PHP:      7.0
  * Author:            Ruben Madila
